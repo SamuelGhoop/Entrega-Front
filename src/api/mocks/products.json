@@ -1,0 +1,35 @@
+[
+  {
+    "id_producto": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "nombre_producto": "Arepa de huevo",
+    "descripcion": "Crujiente, recién hecha",
+    "precio": 4500,
+    "imagen_url": "",
+    "disponible": true,
+    "minutos_preparacion": 6,
+    "isActive": 1,
+    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+  },
+  {
+    "id_producto": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "nombre_producto": "Jugo natural",
+    "descripcion": "Lulo, mora o mango",
+    "precio": 5000,
+    "imagen_url": "",
+    "disponible": true,
+    "minutos_preparacion": 3,
+    "isActive": 1,
+    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+  },
+  {
+    "id_producto": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+    "nombre_producto": "Sandwich de pollo",
+    "descripcion": "Pan artesanal, pollo a la plancha",
+    "precio": 9500,
+    "imagen_url": "",
+    "disponible": true,
+    "minutos_preparacion": 10,
+    "isActive": 1,
+    "categoriaId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
+  }
+]
