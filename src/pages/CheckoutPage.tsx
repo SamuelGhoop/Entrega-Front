@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { ApiError } from '../api/client';
 import { CreditCard, ShieldCheck } from 'lucide-react';
 import { useCart } from '../hooks/useCart';
 import { orderService } from '../api/orderService';
@@ -60,10 +60,8 @@ export function CheckoutPage() {
       setTimeout(() => navigate(`/ordenes/${orden.id_orden}`), 1200);
     } catch (err) {
       const message =
-        axios.isAxiosError(err) && err.response?.data
-          ? typeof err.response.data === 'string'
-            ? err.response.data
-            : 'No se pudo procesar el pago.'
+        err instanceof ApiError
+          ? err.message || 'No se pudo procesar el pago.'
           : 'No se pudo procesar el pago.';
       setError(message);
       setStep('pago');

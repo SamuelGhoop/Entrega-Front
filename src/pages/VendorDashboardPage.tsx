@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { RefreshCw } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { FolderPlus, Plus, RefreshCw } from 'lucide-react';
 import { storeService } from '../api/storeService';
 import { orderService } from '../api/orderService';
 import { OrderCard } from '../components/orders/OrderCard';
@@ -91,9 +92,23 @@ export function VendorDashboardPage() {
             {tienda ? tienda.nombre_tienda : 'Sin tienda asignada'}
           </p>
         </div>
-        <Button variant="secondary" onClick={load}>
-          <RefreshCw className="h-4 w-4" aria-hidden="true" /> Refrescar
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            to="/vendor/categorias/nueva"
+            className="inline-flex items-center gap-2 rounded-lg border border-ink-300 bg-white px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100"
+          >
+            <FolderPlus className="h-4 w-4" aria-hidden="true" /> Nueva categoría
+          </Link>
+          <Link
+            to="/vendor/productos/nuevo"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700"
+          >
+            <Plus className="h-4 w-4" aria-hidden="true" /> Nuevo producto
+          </Link>
+          <Button variant="secondary" onClick={load}>
+            <RefreshCw className="h-4 w-4" aria-hidden="true" /> Refrescar
+          </Button>
+        </div>
       </header>
 
       <div className="mb-4 flex flex-wrap gap-2" role="tablist" aria-label="Filtros">

@@ -1,35 +1,122 @@
 [
   {
-    "id_producto": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "id_producto": "a1111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
     "nombre_producto": "Arepa de huevo",
-    "descripcion": "Crujiente, recién hecha",
+    "descripcion": "Crujiente, recién hecha, con huevo de campo",
     "precio": 4500,
-    "imagen_url": "",
+    "imagen_url": "https://k-listo.com/wp-content/uploads/2020/10/AREPA_HUEVO.jpg",
     "disponible": true,
     "minutos_preparacion": 6,
     "isActive": 1,
-    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    "tiendaId": "11111111-1111-1111-1111-111111111111"
   },
   {
-    "id_producto": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-    "nombre_producto": "Jugo natural",
-    "descripcion": "Lulo, mora o mango",
-    "precio": 5000,
-    "imagen_url": "",
+    "id_producto": "a2222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "nombre_producto": "Café con leche",
+    "descripcion": "Espresso doble con leche vaporizada",
+    "precio": 4000,
+    "imagen_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
     "disponible": true,
     "minutos_preparacion": 3,
     "isActive": 1,
-    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    "tiendaId": "11111111-1111-1111-1111-111111111111"
   },
   {
-    "id_producto": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-    "nombre_producto": "Sandwich de pollo",
-    "descripcion": "Pan artesanal, pollo a la plancha",
-    "precio": 9500,
-    "imagen_url": "",
+    "id_producto": "a3333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "nombre_producto": "Croissant de jamón y queso",
+    "descripcion": "Hojaldrado, gratinado al horno",
+    "precio": 6500,
+    "imagen_url": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80",
     "disponible": true,
+    "minutos_preparacion": 5,
+    "isActive": 1,
+    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    "tiendaId": "11111111-1111-1111-1111-111111111111"
+  },
+  {
+    "id_producto": "a4444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "nombre_producto": "Empanada de carne",
+    "descripcion": "Maíz crocante, relleno tradicional",
+    "precio": 3500,
+    "imagen_url": "https://assets.unileversolutions.com/recipes-v3/237001-default.jpg?im=AspectCrop=(720,459);Resize=(720,459)",
+    "disponible": true,
+    "minutos_preparacion": 4,
+    "isActive": 1,
+    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    "tiendaId": "11111111-1111-1111-1111-111111111111"
+  },
+  {
+    "id_producto": "a5555555-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "nombre_producto": "Jugo natural",
+    "descripcion": "Lulo, mora o mango — del día",
+    "precio": 5000,
+    "imagen_url": "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=80",
+    "disponible": true,
+    "minutos_preparacion": 3,
+    "isActive": 1,
+    "categoriaId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    "tiendaId": "11111111-1111-1111-1111-111111111111"
+  },
+  {
+    "id_producto": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "nombre_producto": "Wrap de pollo BBQ",
+    "descripcion": "Pollo a la plancha, mix verde, salsa BBQ ahumada",
+    "precio": 12000,
+    "imagen_url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+    "disponible": true,
+    "minutos_preparacion": 8,
+    "isActive": 1,
+    "categoriaId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "tiendaId": "22222222-2222-2222-2222-222222222222"
+  },
+  {
+    "id_producto": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "nombre_producto": "Bowl mediterráneo",
+    "descripcion": "Quinoa, garbanzos, pepino, feta y aceitunas",
+    "precio": 14500,
+    "imagen_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
+    "disponible": true,
+    "minutos_preparacion": 7,
+    "isActive": 1,
+    "categoriaId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "tiendaId": "22222222-2222-2222-2222-222222222222"
+  },
+  {
+    "id_producto": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "nombre_producto": "Wrap vegetariano",
+    "descripcion": "Hummus, vegetales asados y aguacate",
+    "precio": 11000,
+    "imagen_url": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80",
+    "disponible": true,
+    "minutos_preparacion": 7,
+    "isActive": 1,
+    "categoriaId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "tiendaId": "22222222-2222-2222-2222-222222222222"
+  },
+  {
+    "id_producto": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "nombre_producto": "Bowl de salmón",
+    "descripcion": "Salmón, arroz integral, edamame y aguacate",
+    "precio": 18500,
+    "imagen_url": "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=800&q=80",
+    "disponible": false,
     "minutos_preparacion": 10,
     "isActive": 1,
-    "categoriaId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
+    "categoriaId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "tiendaId": "22222222-2222-2222-2222-222222222222"
+  },
+  {
+    "id_producto": "b5555555-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "nombre_producto": "Smoothie verde",
+    "descripcion": "Espinaca, manzana, jengibre y limón",
+    "precio": 8500,
+    "imagen_url": "https://images.unsplash.com/photo-1610970881699-44a5587cabec?auto=format&fit=crop&w=800&q=80",
+    "disponible": true,
+    "minutos_preparacion": 4,
+    "isActive": 1,
+    "categoriaId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "tiendaId": "22222222-2222-2222-2222-222222222222"
   }
 ]

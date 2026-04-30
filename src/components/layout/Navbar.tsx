@@ -52,6 +52,13 @@ export function Navbar() {
               </NavLink>
             </li>
           )}
+          {user?.role === 'Admin' && (
+            <li>
+              <NavLink to="/admin" className={linkClass}>
+                Admin
+              </NavLink>
+            </li>
+          )}
         </ul>
 
         <div className="flex items-center gap-2">

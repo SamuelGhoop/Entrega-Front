@@ -11,8 +11,14 @@ export interface RegisterDTO {
   Role: Role;
 }
 
+export interface CreateVendorDTO {
+  Email: string;
+  Password: string;
+  nombre_tienda: string;
+}
+
 export interface AuthResponse {
-  Token: string;
+  token: string;
 }
 
 export interface JwtPayload {
@@ -35,6 +41,8 @@ export interface Tienda {
   nombre_tienda: string;
   isActive: number;
   vendorId: string;
+  imagen_url?: string;
+  descripcion?: string;
 }
 
 export interface Categoria {
@@ -54,6 +62,7 @@ export interface Producto {
   minutos_preparacion: number;
   isActive: number;
   categoriaId: string;
+  tiendaId?: string;
 }
 
 export type EstadoOrden = 0 | 1 | 2 | 3;

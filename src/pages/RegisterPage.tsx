@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { UserPlus } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { useAuth } from '../hooks/useAuth';
+import { ApiError } from '../api/client';
 
 export function RegisterPage() {
   const navigate = useNavigate();
@@ -38,10 +38,8 @@ export function RegisterPage() {
       setTimeout(() => navigate('/login', { replace: true }), 1200);
     } catch (err) {
       const message =
-        axios.isAxiosError(err) && err.response?.data
-          ? typeof err.response.data === 'string'
-            ? err.response.data
-            : 'No se pudo registrar (¿correo ya en uso?).'
+        err instanceof ApiError
+          ? err.message || 'No se pudo registrar (¿correo ya en uso?).'
           : 'No se pudo registrar.';
       setError(message);
     } finally {

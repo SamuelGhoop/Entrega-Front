@@ -1,17 +1,27 @@
 import { apiClient } from './client';
-import type { AuthResponse, LoginDTO, RegisterDTO } from '../types';
+import type {
+  AuthResponse,
+  CreateVendorDTO,
+  LoginDTO,
+  RegisterDTO,
+} from '../types';
 
 export const authService = {
   async login(payload: LoginDTO): Promise<AuthResponse> {
-    const { data } = await apiClient.post<AuthResponse>('/Auth/login', payload);
-    return data;
+    return await apiClient.post<AuthResponse>('/Auth/login', payload);
   },
 
-  async register(payload: RegisterDTO): Promise<{ Message: string }> {
-    const { data } = await apiClient.post<{ Message: string }>(
+  async register(payload: RegisterDTO): Promise<{ message: string }> {
+    return await apiClient.post<{ message: string }>(
       '/Auth/register',
       payload
     );
-    return data;
+  },
+
+  async createVendor(payload: CreateVendorDTO): Promise<{ message: string }> {
+    return await apiClient.post<{ message: string }>(
+      '/Auth/create-vendor',
+      payload
+    );
   },
 };

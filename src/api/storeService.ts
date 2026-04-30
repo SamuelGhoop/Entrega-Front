@@ -5,8 +5,7 @@ import type { Tienda, Categoria } from '../types';
 export const storeService = {
   async getAll(): Promise<Tienda[]> {
     if (USE_MOCKS) return mockStores;
-    const { data } = await apiClient.get<Tienda[]>('/Tienda');
-    return data;
+    return await apiClient.get<Tienda[]>('/Tienda');
   },
 
   async getById(id: string): Promise<Tienda> {
@@ -15,13 +14,17 @@ export const storeService = {
       if (!found) throw new Error('Tienda no encontrada');
       return found;
     }
-    const { data } = await apiClient.get<Tienda>(`/Tienda/${id}`);
-    return data;
+    return await apiClient.get<Tienda>(`/Tienda/${id}`);
   },
 
   async getCategorias(tiendaId: string): Promise<Categoria[]> {
     if (USE_MOCKS) return [];
-    const { data } = await apiClient.get<Categoria[]>(`/Categoria/${tiendaId}`);
-    return data;
+    return await apiClient.get<Categoria[]>(`/Categoria/${tiendaId}`);
+  },
+
+  async createCategoria(
+    payload: Omit<Categoria, 'id_categoria'>
+  ): Promise<Categoria> {
+    return await apiClient.post<Categoria>('/Categoria', payload);
   },
 };

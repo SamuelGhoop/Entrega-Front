@@ -1,6 +1,6 @@
 # PoliFood — Frontend
 
-Frontend de **PoliFood**, plataforma de pedidos de comida del campus con roles `Student` y `Vendor`.
+Frontend de **PoliFood**, plataforma de pedidos de comida del campus con roles `Student`, `Vendor` y `Admin`.
 
 Esta SPA se conecta al backend ASP.NET Core en `D:/Samuel/Web backend/PoliFoodCaso/PoliFoodCaso` (API REST con JWT).
 
@@ -11,7 +11,7 @@ Esta SPA se conecta al backend ASP.NET Core en `D:/Samuel/Web backend/PoliFoodCa
 - **Vite** + **React 19** + **TypeScript**
 - **Tailwind CSS v3** (responsive, mobile-first)
 - **React Router** (rutas anidadas + `Outlet` + rutas protegidas por rol)
-- **axios** (instancia con interceptor JWT)
+- **fetch** + `async/await` (cliente propio en `api/client.ts` con `ApiError`, JWT y manejo de 401)
 - **lucide-react** (íconos)
 
 ## Estructura
@@ -55,13 +55,16 @@ src/
 | `/ordenes`             | Student    | Mis órdenes                    |
 | `/ordenes/:ordenId`    | Student    | Tracking de orden              |
 | `/vendor`              | Vendor     | Dashboard de órdenes + filtros |
+| `/vendor/categorias/nueva` | Vendor | Crear categoría en su tienda  |
+| `/vendor/productos/nuevo` | Vendor  | Crear producto (requiere categoría) |
+| `/admin`               | Admin      | Crear vendors + tienda asociada |
 
 ## Endpoints consumidos
 
-- `POST   /api/Auth/login`, `POST /api/Auth/register`
+- `POST   /api/Auth/login`, `POST /api/Auth/register`, `POST /api/Auth/create-vendor` (Admin)
 - `GET    /api/Tienda`, `GET /api/Tienda/{id}`
-- `GET    /api/Categoria/{tiendaId}`
-- `GET    /api/Producto/{tiendaId}`, `GET /api/Producto/detalle/{id}`
+- `GET    /api/Categoria/{tiendaId}`, `POST /api/Categoria` (Vendor)
+- `GET    /api/Producto/{tiendaId}`, `GET /api/Producto/detalle/{id}`, `POST /api/Producto` (Vendor)
 - `POST   /api/Orden/checkout`, `PATCH /api/Orden/{id}/confirmar-pago`
 - `GET    /api/Orden/student`, `GET /api/Orden/tienda/{tiendaId}`
 - `PATCH  /api/Orden/{id}/estado`

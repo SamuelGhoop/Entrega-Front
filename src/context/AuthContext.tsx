@@ -66,9 +66,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = useCallback(async (payload: LoginDTO) => {
-    const { Token } = await authService.login(payload);
-    localStorage.setItem(TOKEN_KEY, Token);
-    const built = buildUserFromToken(Token);
+    const { token } = await authService.login(payload);
+    localStorage.setItem(TOKEN_KEY, token);
+    const built = buildUserFromToken(token);
     if (!built) throw new Error('Token inválido');
     setUser(built);
     return built;

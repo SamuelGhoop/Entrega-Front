@@ -10,6 +10,9 @@ import { CheckoutPage } from './pages/CheckoutPage';
 import { StudentOrdersPage } from './pages/StudentOrdersPage';
 import { OrderTrackingPage } from './pages/OrderTrackingPage';
 import { VendorDashboardPage } from './pages/VendorDashboardPage';
+import { VendorNewProductPage } from './pages/VendorNewProductPage';
+import { VendorNewCategoriaPage } from './pages/VendorNewCategoriaPage';
+import { AdminPage } from './pages/AdminPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export default function App() {
@@ -61,6 +64,31 @@ export default function App() {
           element={
             <ProtectedRoute roles={['Vendor']}>
               <VendorDashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="vendor/categorias/nueva"
+          element={
+            <ProtectedRoute roles={['Vendor']}>
+              <VendorNewCategoriaPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="vendor/productos/nuevo"
+          element={
+            <ProtectedRoute roles={['Vendor']}>
+              <VendorNewProductPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="admin"
+          element={
+            <ProtectedRoute roles={['Admin']}>
+              <AdminPage />
             </ProtectedRoute>
           }
         />

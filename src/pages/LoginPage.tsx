@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { LogIn } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { useAuth } from '../hooks/useAuth';
+import { ApiError } from '../api/client';
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -26,14 +26,17 @@ export function LoginPage() {
     setError(null);
     try {
       const user = await login({ Email: email, Password: password });
-      const target = user.role === 'Vendor' ? '/vendor' : from;
+      const target =
+        user.role === 'Vendor'
+          ? '/vendor'
+          : user.role === 'Admin'
+            ? '/admin'
+            : from;
       navigate(target, { replace: true });
     } catch (err) {
       const message =
-        axios.isAxiosError(err) && err.response?.data
-          ? typeof err.response.data === 'string'
-            ? err.response.data
-            : err.response.data.Message ?? 'Credenciales incorrectas.'
+        err instanceof ApiError
+          ? err.message || 'Credenciales incorrectas.'
           : 'No se pudo iniciar sesión.';
       setError(message);
     } finally {
