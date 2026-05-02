@@ -32,6 +32,12 @@ export const mockUsers: MockUser[] = [
     role: 'Vendor',
   },
   {
+    id: 'mock-vendor-2',
+    email: 'vendor2@demo.com',
+    password: '12345678',
+    role: 'Vendor',
+  },
+  {
     id: 'mock-admin-1',
     email: 'admin@demo.com',
     password: '12345678',
@@ -82,9 +88,11 @@ export function getCurrentMockUserId(): string {
   }
 }
 
-const baseStores = (storesData as Tienda[]).map((store, index) =>
-  index === 0 ? { ...store, vendorId: 'mock-vendor-1' } : store
-);
+const baseStores = (storesData as Tienda[]).map((store, index) => {
+  if (index === 0) return { ...store, vendorId: 'mock-vendor-1' };
+  if (index === 1) return { ...store, vendorId: 'mock-vendor-2' };
+  return store;
+});
 
 export const mockStores: Tienda[] = [...baseStores];
 export const mockProducts: Producto[] = [...(productsData as Producto[])];

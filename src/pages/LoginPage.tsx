@@ -9,7 +9,8 @@ import { USE_MOCKS } from '../api/mocks';
 
 const DEMO_ACCOUNTS = [
   { label: 'Student', email: 'student@demo.com', password: '12345678' },
-  { label: 'Vendor', email: 'vendor@demo.com', password: '12345678' },
+  { label: 'Vendor (Cafetería)', email: 'vendor@demo.com', password: '12345678' },
+  { label: 'Vendor (Wraps)', email: 'vendor2@demo.com', password: '12345678' },
   { label: 'Admin', email: 'admin@demo.com', password: '12345678' },
 ];
 

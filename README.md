@@ -41,11 +41,12 @@ Por defecto, `.env.example` viene con `VITE_USE_MOCKS=true`. Esto hace que **tod
 
 En la pantalla de login, en modo demo aparecen tres botones de un click:
 
-| Rol     | Email               | Contraseña |
-| ------- | ------------------- | ---------- |
-| Student | `student@demo.com`  | `12345678` |
-| Vendor  | `vendor@demo.com`   | `12345678` |
-| Admin   | `admin@demo.com`    | `12345678` |
+| Rol                       | Email                | Contraseña |
+| ------------------------- | -------------------- | ---------- |
+| Student                   | `student@demo.com`   | `12345678` |
+| Vendor (Cafetería Central)| `vendor@demo.com`    | `12345678` |
+| Vendor (Wraps & Bowls)    | `vendor2@demo.com`   | `12345678` |
+| Admin                     | `admin@demo.com`     | `12345678` |
 
 Para integrar con el backend real, cambia `VITE_USE_MOCKS=false` y ajusta `VITE_API_URL`.
 
