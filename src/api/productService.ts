@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import { USE_MOCKS, mockProducts } from './mocks';
+import { USE_MOCKS, mockHelpers, mockProducts } from './mocks';
 import type { Producto } from '../types';
 
 export const productService = {
@@ -20,6 +20,16 @@ export const productService = {
   },
 
   async create(producto: Omit<Producto, 'id_producto'>): Promise<Producto> {
+    if (USE_MOCKS) {
+      const categoria = mockHelpers.findCategoria(producto.categoriaId);
+      const nuevo: Producto = {
+        ...producto,
+        id_producto: mockHelpers.makeUuid(),
+        tiendaId: categoria?.tiendaId ?? producto.tiendaId,
+      };
+      mockProducts.push(nuevo);
+      return nuevo;
+    }
     return await apiClient.post<Producto>('/Producto', producto);
   },
 };

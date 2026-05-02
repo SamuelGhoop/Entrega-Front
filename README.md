@@ -35,38 +35,28 @@ npm run dev
 # Abre http://localhost:5173
 ```
 
-### Modo sin backend (mocks locales)
+### Modo demo (mocks locales — recomendado para evaluar)
 
-Para revisar la UI sin levantar el backend ASP.NET Core:
+Por defecto, `.env.example` viene con `VITE_USE_MOCKS=true`. Esto hace que **toda la app funcione sin backend**: auth, listas, formularios y persistencia en memoria de la sesión. Datos iniciales en `src/api/mocks/*.json`.
 
-```bash
-# en .env
-VITE_USE_MOCKS=true
-```
+En la pantalla de login, en modo demo aparecen tres botones de un click:
 
-Los servicios leerán desde `src/api/mocks/*.json`. Cambiar a `false` para integrar con el backend real.
+| Rol     | Email               | Contraseña |
+| ------- | ------------------- | ---------- |
+| Student | `student@demo.com`  | `12345678` |
+| Vendor  | `vendor@demo.com`   | `12345678` |
+| Admin   | `admin@demo.com`    | `12345678` |
 
-### Cuentas de prueba
-
-- **Student**: regístrate desde `/registro`.
-- **Vendor**: lo crea un Admin desde `/admin` (ver flujo abajo).
-- **Admin**: hay que insertarlo manualmente en la BD (el `register` solo crea Students por contrato del backend):
-  ```sql
-  -- ejecutar después de registrar un usuario normal
-  INSERT INTO AspNetUserRoles (UserId, RoleId)
-  SELECT u.Id, r.Id
-  FROM AspNetUsers u, AspNetRoles r
-  WHERE u.Email = 'admin@correo.com' AND r.Name = 'Admin';
-  ```
+Para integrar con el backend real, cambia `VITE_USE_MOCKS=false` y ajusta `VITE_API_URL`.
 
 ### Flujo end-to-end para validar la entrega
 
-1. Login como **Admin** → `/admin` → crear vendor + tienda.
-2. Login como **Vendor** → `/vendor` → "Nueva categoría" → crear (ej. "Bebidas").
+1. Login como **Admin** → `/admin` → crear un vendor + tienda nueva.
+2. Login como **Vendor** (`vendor@demo.com`) → `/vendor` → "Nueva categoría" → crear (ej. "Bebidas").
 3. Tras crear la categoría se redirige a `/vendor/productos/nuevo` → crear producto.
-4. Login como **Student** → `/tiendas` → entrar a la tienda → agregar producto al carrito.
+4. Login como **Student** (`student@demo.com`) → `/tiendas` → entrar a una tienda → agregar producto al carrito.
 5. `/checkout` → confirmar pago → tracking en `/ordenes/:id`.
-6. Login como **Vendor** de nuevo → ver la orden y avanzar estados.
+6. Login como **Vendor** → ver la orden recién creada y avanzar estados (Recibida → Preparando → Lista → Entregada).
 
 ## Estructura
 

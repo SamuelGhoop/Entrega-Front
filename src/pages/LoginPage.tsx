@@ -5,6 +5,13 @@ import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { useAuth } from '../hooks/useAuth';
 import { ApiError } from '../api/client';
+import { USE_MOCKS } from '../api/mocks';
+
+const DEMO_ACCOUNTS = [
+  { label: 'Student', email: 'student@demo.com', password: '12345678' },
+  { label: 'Vendor', email: 'vendor@demo.com', password: '12345678' },
+  { label: 'Admin', email: 'admin@demo.com', password: '12345678' },
+];
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -19,13 +26,15 @@ export function LoginPage() {
 
   const from = (location.state as { from?: string } | null)?.from ?? '/tiendas';
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!isValid || submitting) return;
+  const doLogin = async (creds: { email: string; password: string }) => {
+    if (submitting) return;
     setSubmitting(true);
     setError(null);
     try {
-      const user = await login({ Email: email, Password: password });
+      const user = await login({
+        Email: creds.email,
+        Password: creds.password,
+      });
       const target =
         user.role === 'Vendor'
           ? '/vendor'
@@ -44,6 +53,12 @@ export function LoginPage() {
     }
   };
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!isValid) return;
+    await doLogin({ email, password });
+  };
+
   return (
     <section className="mx-auto max-w-md">
       <header className="mb-6 text-center">
@@ -52,6 +67,35 @@ export function LoginPage() {
           Pide tu comida del campus en segundos.
         </p>
       </header>
+
+      {USE_MOCKS && (
+        <aside
+          aria-label="Cuentas de demostración"
+          className="mb-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
+        >
+          <p className="mb-2 font-medium">
+            Modo demo — entra con un click:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {DEMO_ACCOUNTS.map((acc) => (
+              <button
+                key={acc.email}
+                type="button"
+                onClick={() =>
+                  doLogin({ email: acc.email, password: acc.password })
+                }
+                disabled={submitting}
+                className="rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-medium text-amber-900 hover:bg-amber-100 disabled:opacity-60"
+              >
+                Entrar como {acc.label}
+              </button>
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-amber-800">
+            Contraseña común: <code>12345678</code>
+          </p>
+        </aside>
+      )}
 
       <form
         onSubmit={handleSubmit}
