@@ -74,7 +74,8 @@ export function getCurrentMockUserId(): string {
   const token = localStorage.getItem(TOKEN_KEY);
   if (!token) return mockUsers[0].id;
   try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
+    const part = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+    const payload = JSON.parse(atob(part));
     return payload.sub ?? mockUsers[0].id;
   } catch {
     return mockUsers[0].id;

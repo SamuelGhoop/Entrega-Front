@@ -125,7 +125,7 @@ Variables:
 | Variable         | Default                       | Descripción                                |
 | ---------------- | ----------------------------- | ------------------------------------------ |
 | `VITE_API_URL`   | `https://localhost:7170/api`  | Base URL del backend ASP.NET Core          |
-| `VITE_USE_MOCKS` | `false`                       | Si `true`, lee desde `src/api/mocks/*.json` |
+| `VITE_USE_MOCKS` | `true`                        | Si `true`, usa los mocks de `src/api/mocks/`. Si `false`, pega al backend real |
 
 ## Scripts
 
