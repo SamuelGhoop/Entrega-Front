@@ -14,11 +14,65 @@ Esta SPA se conecta al backend ASP.NET Core en `D:/Samuel/Web backend/PoliFoodCa
 - **fetch** + `async/await` (cliente propio en `api/client.ts` con `ApiError`, JWT y manejo de 401)
 - **lucide-react** (íconos)
 
+## Cómo correr el proyecto
+
+> Requisitos: **Node.js 20+** y **npm 10+**.
+
+```bash
+# 1. Clonar el repo y entrar a la carpeta del frontend
+cd frontend
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Configurar variables de entorno
+cp .env.example .env
+# (Windows: copy .env.example .env)
+# Edita .env si tu backend corre en otra URL.
+
+# 4. Arrancar el dev server
+npm run dev
+# Abre http://localhost:5173
+```
+
+### Modo sin backend (mocks locales)
+
+Para revisar la UI sin levantar el backend ASP.NET Core:
+
+```bash
+# en .env
+VITE_USE_MOCKS=true
+```
+
+Los servicios leerán desde `src/api/mocks/*.json`. Cambiar a `false` para integrar con el backend real.
+
+### Cuentas de prueba
+
+- **Student**: regístrate desde `/registro`.
+- **Vendor**: lo crea un Admin desde `/admin` (ver flujo abajo).
+- **Admin**: hay que insertarlo manualmente en la BD (el `register` solo crea Students por contrato del backend):
+  ```sql
+  -- ejecutar después de registrar un usuario normal
+  INSERT INTO AspNetUserRoles (UserId, RoleId)
+  SELECT u.Id, r.Id
+  FROM AspNetUsers u, AspNetRoles r
+  WHERE u.Email = 'admin@correo.com' AND r.Name = 'Admin';
+  ```
+
+### Flujo end-to-end para validar la entrega
+
+1. Login como **Admin** → `/admin` → crear vendor + tienda.
+2. Login como **Vendor** → `/vendor` → "Nueva categoría" → crear (ej. "Bebidas").
+3. Tras crear la categoría se redirige a `/vendor/productos/nuevo` → crear producto.
+4. Login como **Student** → `/tiendas` → entrar a la tienda → agregar producto al carrito.
+5. `/checkout` → confirmar pago → tracking en `/ordenes/:id`.
+6. Login como **Vendor** de nuevo → ver la orden y avanzar estados.
+
 ## Estructura
 
 ```
 src/
-├── api/                  ← capa de servicios (axios) + mocks JSON
+├── api/                  ← capa de servicios (fetch) + mocks JSON
 │   ├── client.ts
 │   ├── authService.ts
 │   ├── storeService.ts
@@ -95,6 +149,6 @@ npm run lint      # ESLint
 
 ## Notas
 
-- El token JWT se guarda en `localStorage` (`polifood.token`) y se inyecta vía interceptor de axios.
+- El token JWT se guarda en `localStorage` (`polifood.token`) y se inyecta automáticamente en cada request desde `api/client.ts`.
 - Si el backend usa HTTPS de desarrollo, ejecuta `dotnet dev-certs https --trust` o cambia la URL a HTTP en `.env`.
 - El carrito se persiste en `localStorage` (`polifood.cart`) y se vacía si cambias de tienda.
