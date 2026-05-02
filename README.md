@@ -35,7 +35,7 @@ npm run dev
 # Abre http://localhost:5173
 ```
 
-### Modo demo (mocks locales — recomendado para evaluar)
+### Modo demo (mocks locales)
 
 Por defecto, `.env.example` viene con `VITE_USE_MOCKS=true`. Esto hace que **toda la app funcione sin backend**: auth, listas, formularios y persistencia en memoria de la sesión. Datos iniciales en `src/api/mocks/*.json`.
 
