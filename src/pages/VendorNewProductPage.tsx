@@ -54,14 +54,44 @@ export function VendorNewProductPage() {
 
   const precioNum = Number(precio);
   const minutosNum = Number(minutos);
+
+  const nombreError =
+    nombre.trim().length < 2 || nombre.trim().length > 50
+      ? 'El nombre debe tener entre 2 y 50 caracteres.'
+      : undefined;
+
+  const descripcionError =
+    descripcion.trim().length < 10 || descripcion.trim().length > 300
+      ? 'La descripción debe tener entre 10 y 300 caracteres.'
+      : undefined;
+
+  const precioError =
+    precio.length === 0
+      ? 'El precio es obligatorio.'
+      : !Number.isFinite(precioNum) || precioNum <= 0
+        ? 'El precio debe ser mayor a 0.'
+        : precioNum > 1_000_000
+          ? 'El precio máximo es 1.000.000 COP.'
+          : undefined;
+
+  const minutosError =
+    minutos.length === 0
+      ? 'El tiempo de preparación es obligatorio.'
+      : !Number.isInteger(minutosNum) || minutosNum < 1 || minutosNum > 120
+        ? 'Debe ser un número entero entre 1 y 120.'
+        : undefined;
+
+  const imagenUrlError =
+    imagenUrl.trim().length > 0 && !/^https?:\/\/.+/i.test(imagenUrl.trim())
+      ? 'La URL debe iniciar con http:// o https://'
+      : undefined;
+
   const isValid =
-    nombre.trim().length >= 2 &&
-    descripcion.trim().length > 0 &&
-    Number.isFinite(precioNum) &&
-    precioNum > 0 &&
-    Number.isInteger(minutosNum) &&
-    minutosNum >= 1 &&
-    minutosNum <= 120 &&
+    !nombreError &&
+    !descripcionError &&
+    !precioError &&
+    !minutosError &&
+    !imagenUrlError &&
     categoriaId.length > 0;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -144,6 +174,7 @@ export function VendorNewProductPage() {
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             placeholder="Ej: Wrap de pollo"
+            error={nombreError}
             required
           />
 
@@ -155,8 +186,18 @@ export function VendorNewProductPage() {
               placeholder="Ingredientes, sabor, preparación..."
               rows={3}
               required
-              className="rounded-lg border border-ink-300 bg-white px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+              aria-invalid={Boolean(descripcionError)}
+              className={`rounded-lg border bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 ${
+                descripcionError
+                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20'
+                  : 'border-ink-300 focus:border-brand-500 focus:ring-brand-500/20'
+              }`}
             />
+            {descripcionError && (
+              <p role="alert" className="text-xs text-red-600">
+                {descripcionError}
+              </p>
+            )}
           </label>
 
           <div className="grid grid-cols-2 gap-3">
@@ -168,6 +209,7 @@ export function VendorNewProductPage() {
               value={precio}
               onChange={(e) => setPrecio(e.target.value)}
               placeholder="9500"
+              error={precioError}
               required
             />
             <Input
@@ -178,6 +220,7 @@ export function VendorNewProductPage() {
               value={minutos}
               onChange={(e) => setMinutos(e.target.value)}
               placeholder="8"
+              error={minutosError}
               required
             />
           </div>
@@ -188,6 +231,7 @@ export function VendorNewProductPage() {
             value={imagenUrl}
             onChange={(e) => setImagenUrl(e.target.value)}
             placeholder="https://..."
+            error={imagenUrlError}
           />
 
           <label className="flex flex-col gap-1 text-sm">

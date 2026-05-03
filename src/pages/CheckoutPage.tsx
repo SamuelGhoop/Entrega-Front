@@ -20,15 +20,20 @@ export function CheckoutPage() {
   const [error, setError] = useState<string | null>(null);
 
   const sanitizedNumber = cardNumber.replace(/\D/g, '');
-  const cardNumberError =
-    cardNumber.length > 0 && sanitizedNumber.length < 12
-      ? 'Mínimo 12 dígitos.'
+
+  const cardNameError =
+    cardName.trim().length < 3 || cardName.trim().length > 50
+      ? 'El nombre debe tener entre 3 y 50 caracteres.'
       : undefined;
 
-  const isValid =
-    cardName.trim().length >= 3 &&
-    sanitizedNumber.length >= 12 &&
-    lines.length > 0;
+  const cardNumberError =
+    sanitizedNumber.length < 12
+      ? 'Mínimo 12 dígitos.'
+      : sanitizedNumber.length > 19
+        ? 'Máximo 19 dígitos.'
+        : undefined;
+
+  const isValid = !cardNameError && !cardNumberError && lines.length > 0;
 
   if (lines.length === 0 && step === 'pago') {
     return (
@@ -88,6 +93,7 @@ export function CheckoutPage() {
             onChange={(e) => setCardName(e.target.value)}
             placeholder="Como aparece en la tarjeta"
             autoComplete="cc-name"
+            error={cardNameError}
             required
           />
           <Input

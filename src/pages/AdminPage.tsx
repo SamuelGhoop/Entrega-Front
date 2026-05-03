@@ -13,20 +13,23 @@ export function AdminPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const passwordError =
-    password.length === 0
-      ? undefined
-      : password.length < 8
-        ? 'Mínimo 8 caracteres.'
-        : !/\d/.test(password)
-          ? 'Debe incluir al menos un número.'
-          : undefined;
+  const nombreTiendaError =
+    nombreTienda.trim().length < 2 || nombreTienda.trim().length > 50
+      ? 'El nombre debe tener entre 2 y 50 caracteres.'
+      : undefined;
 
-  const isValid =
-    email.includes('@') &&
-    password.length >= 8 &&
-    !passwordError &&
-    nombreTienda.trim().length >= 2;
+  const emailError = !/^\S+@\S+\.\S+$/.test(email)
+    ? 'Ingresa un correo válido.'
+    : undefined;
+
+  const passwordError =
+    password.length < 8
+      ? 'Mínimo 8 caracteres.'
+      : !/\d/.test(password)
+        ? 'Debe incluir al menos un número.'
+        : undefined;
+
+  const isValid = !nombreTiendaError && !emailError && !passwordError;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -81,6 +84,7 @@ export function AdminPage() {
           value={nombreTienda}
           onChange={(e) => setNombreTienda(e.target.value)}
           placeholder="Ej: Cafetería Central"
+          error={nombreTiendaError}
           required
         />
         <Input
@@ -90,6 +94,7 @@ export function AdminPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="vendor@correo.edu.co"
+          error={emailError}
           required
         />
         <Input

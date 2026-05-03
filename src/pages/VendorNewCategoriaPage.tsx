@@ -40,7 +40,12 @@ export function VendorNewCategoriaPage() {
       .finally(() => setLoading(false));
   }, [user?.id]);
 
-  const isValid = nombre.trim().length >= 2 && tienda !== null;
+  const nombreError =
+    nombre.trim().length < 2 || nombre.trim().length > 30
+      ? 'El nombre debe tener entre 2 y 30 caracteres.'
+      : undefined;
+
+  const isValid = !nombreError && tienda !== null;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -102,6 +107,7 @@ export function VendorNewCategoriaPage() {
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             placeholder="Ej: Bebidas, Desayunos, Wraps"
+            error={nombreError}
             required
           />
 

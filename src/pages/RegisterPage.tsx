@@ -15,17 +15,18 @@ export function RegisterPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  const passwordError =
-    password.length === 0
-      ? undefined
-      : password.length < 8
-        ? 'Mínimo 8 caracteres.'
-        : !/\d/.test(password)
-          ? 'Debe incluir al menos un número.'
-          : undefined;
+  const emailError = !/^\S+@\S+\.\S+$/.test(email)
+    ? 'Ingresa un correo válido.'
+    : undefined;
 
-  const isValid =
-    email.includes('@') && password.length >= 8 && !passwordError;
+  const passwordError =
+    password.length < 8
+      ? 'Mínimo 8 caracteres.'
+      : !/\d/.test(password)
+        ? 'Debe incluir al menos un número.'
+        : undefined;
+
+  const isValid = !emailError && !passwordError;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,6 +65,7 @@ export function RegisterPage() {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          error={emailError}
           required
         />
         <Input

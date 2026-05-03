@@ -23,7 +23,14 @@ export function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const isValid = email.includes('@') && password.length >= 8;
+  const emailError = !/^\S+@\S+\.\S+$/.test(email)
+    ? 'Ingresa un correo válido.'
+    : undefined;
+
+  const passwordError =
+    password.length < 8 ? 'Mínimo 8 caracteres.' : undefined;
+
+  const isValid = !emailError && !passwordError;
 
   const from = (location.state as { from?: string } | null)?.from ?? '/tiendas';
 
@@ -109,6 +116,7 @@ export function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="tu@correo.edu.co"
+          error={emailError}
           required
         />
         <Input
@@ -118,6 +126,7 @@ export function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Mínimo 8 caracteres"
+          error={passwordError}
           required
         />
 
